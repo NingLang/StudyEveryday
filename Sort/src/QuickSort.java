@@ -1,6 +1,6 @@
 /**
  * @ClassName QuickSort
- * @Desctiption 快速排序的三种实现方式
+ * @Desctiption 快速排序的三种实现方式  经典-三路-随机三路
  * @Author NingLang
  * @Date 2019/6/23 14:53
  * @Version 1.0
