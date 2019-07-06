@@ -40,6 +40,11 @@ public class BinaryTree {
         recursivePostOrder(a);
         System.out.print('\n' + "iterativePreOrder: ");
         iterativePreOrder(a);
+        System.out.print('\n' + "serialPre: ");
+        System.out.println(serialPre(a));
+        System.out.print('\n' + "iterativePreOrder: ");
+        iterativePreOrder(stringToTree(serialPre(a)));
+
         System.out.print('\n' + "iterativePreOrder_2: ");
         iterativePreOrder_2(a);
         System.out.print('\n' + "iterativeInOrder: ");
@@ -115,7 +120,7 @@ public class BinaryTree {
         }
     }
 
-    //**********非递归的先序遍历**********
+    //**********非递归的先序遍历**********左神
     //栈的思想，按层次倒着进栈，利用后进先出解决顺序问题
     public static void iterativePreOrder_2(TreeNode p) {
         if (p == null) return;
@@ -124,13 +129,47 @@ public class BinaryTree {
         while (!stack.empty()) {
             p = stack.pop();
             visit(p);
-            if (p.right != null) stack.push(p.right);
-            if (p.left != null) stack.push(p.left);
+            if (p.right != null) {
+                stack.push(p.right);
+            }
+            if (p.left != null) {
+                stack.push(p.left);
+            }
         }
     }
 
+    //**********先序遍历序列化树**********左神
+    public static String serialPre(TreeNode p){
+        if (p==null){
+            return "#!";
+        }
+        String res = p.val + "!";
+        res += serialPre(p.left);
+        res += serialPre(p.right);
+        return res;
+    }
 
-    //**********非递归的中序遍历**********
+    public static TreeNode stringToTree (String values){
+        String [] temp = values.split("!");
+        Queue<String> queue = new LinkedList<>();
+        for (String temps: temp) {
+            queue.offer(temps);
+        }
+        return reCon(queue);
+    }
+
+    public static TreeNode reCon(Queue<String> queue){
+        if(queue.peek().equals("#")){
+            queue.poll();
+            return null;
+        }
+        TreeNode head = new TreeNode(Integer.valueOf(queue.poll()));
+        head.left=reCon(queue);
+        head.right=reCon(queue);
+        return head;
+    }
+
+    //**********非递归的中序遍历**********左神
     public static void iterativeInOrder(TreeNode p) {
         if (p == null) return;
         Stack<TreeNode> stack = new Stack<TreeNode>();
@@ -193,19 +232,22 @@ public class BinaryTree {
     }
 
 
-    //**********非递归的后序遍历**********
+    //**********非递归的后序遍历**********左神
     //双栈法，易于理解
     public static void iterativePostOrder_3(TreeNode p) {
         if (p == null) return;
         Stack<TreeNode> stack = new Stack<TreeNode>();
         Stack<TreeNode> result = new Stack<TreeNode>();
-        while (!stack.empty() || p != null) {
-            while (p != null) {
-                stack.push(p);
-                result.push(p);
-                p = p.right;
+        stack.push(p);
+        while (!stack.empty()) {
+            p = stack.pop();
+            result.push(p);
+            if(p.left != null){
+                stack.push(p.left);
             }
-            if (!stack.empty()) p = stack.pop().left;
+            if(p.right != null){
+                stack.push(p.right);
+            }
         }
         while (!result.empty()) {
             p = result.pop();
