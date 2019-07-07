@@ -383,15 +383,14 @@ public class BinaryTree {
         }
     }
 
-    public static boolean isB(TreeNode head){
-        return process(head).isB;
-    }
-
     public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
         TreeNode(int x) { val = x; }
+    }
+    public static boolean isB(TreeNode head){
+        return process(head).isB;
     }
 
 }
