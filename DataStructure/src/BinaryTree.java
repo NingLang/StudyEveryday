@@ -10,13 +10,26 @@ import java.util.Stack;
  * @Date 2019/6/28 20:01
  * @Version 1.0
  **/
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
- }
+
 public class BinaryTree {
+    public static ReturnData process (TreeNode head){
+        if (head == null){
+            return new ReturnData(true,0);
+        }
+
+        ReturnData leftData = process(head.left);
+        if (!leftData.isB) {
+            return new ReturnData(false,0);
+        }
+        ReturnData rightData = process(head.right);
+        if (!rightData.isB){
+            return new ReturnData(false,0);
+        }
+        if (Math.abs(leftData.h-rightData.h)>1){
+            return new ReturnData(false,0);
+        }
+        return new ReturnData(true,Math.max(leftData.h,rightData.h)+1);
+    }
     public static void main(String[] args) {
         //构造树结构测试用
         TreeNode a = new TreeNode(1);
@@ -357,6 +370,28 @@ public class BinaryTree {
         lists.get(lists.size() - depth).add(p.val);
         addToList(lists, p.left, depth + 1);
         addToList(lists, p.right, depth + 1);
+    }
+
+    public static boolean isB(TreeNode head){
+        return process(head).isB;
+    }
+
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
+
+    //**********判断一棵二叉树是否为平衡二叉树**********左神
+    public static class ReturnData{
+        public boolean isB;
+        public int h;
+
+        public ReturnData(boolean isB,int h){
+            this.isB = isB;
+            this.h = h;
+        }
     }
 
 }
