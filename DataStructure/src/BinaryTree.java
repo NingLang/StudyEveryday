@@ -12,23 +12,11 @@ import java.util.Stack;
  **/
 
 public class BinaryTree {
-    public static ReturnData process (TreeNode head){
-        if (head == null){
-            return new ReturnData(true,0);
-        }
-
-        ReturnData leftData = process(head.left);
-        if (!leftData.isB) {
-            return new ReturnData(false,0);
-        }
-        ReturnData rightData = process(head.right);
-        if (!rightData.isB){
-            return new ReturnData(false,0);
-        }
-        if (Math.abs(leftData.h-rightData.h)>1){
-            return new ReturnData(false,0);
-        }
-        return new ReturnData(true,Math.max(leftData.h,rightData.h)+1);
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
     }
     public static void main(String[] args) {
         //构造树结构测试用
@@ -382,12 +370,23 @@ public class BinaryTree {
             this.h = h;
         }
     }
+    public static ReturnData process (TreeNode head){
+        if (head == null){
+            return new ReturnData(true,0);
+        }
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
+        ReturnData leftData = process(head.left);
+        if (!leftData.isB) {
+            return new ReturnData(false,0);
+        }
+        ReturnData rightData = process(head.right);
+        if (!rightData.isB){
+            return new ReturnData(false,0);
+        }
+        if (Math.abs(leftData.h-rightData.h)>1){
+            return new ReturnData(false,0);
+        }
+        return new ReturnData(true,Math.max(leftData.h,rightData.h)+1);
     }
     public static boolean isB(TreeNode head){
         return process(head).isB;
