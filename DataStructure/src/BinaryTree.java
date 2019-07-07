@@ -372,17 +372,6 @@ public class BinaryTree {
         addToList(lists, p.right, depth + 1);
     }
 
-    public static boolean isB(TreeNode head){
-        return process(head).isB;
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
-
     //**********判断一棵二叉树是否为平衡二叉树**********左神
     public static class ReturnData{
         public boolean isB;
@@ -392,6 +381,17 @@ public class BinaryTree {
             this.isB = isB;
             this.h = h;
         }
+    }
+
+    public static boolean isB(TreeNode head){
+        return process(head).isB;
+    }
+
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
     }
 
 }
