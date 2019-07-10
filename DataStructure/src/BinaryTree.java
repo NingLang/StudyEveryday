@@ -392,4 +392,30 @@ public class BinaryTree {
         return process(head).isB;
     }
 
+    //**********求一棵完全二叉树上面节点总数**********左神
+    public static int nodeNum(TreeNode head){
+        if(head == null){
+            return 0;
+        }
+        return bs(head,1,mostLeftLevel(head,1));
+    }
+
+    public static int bs (TreeNode node , int level , int h){
+        if (level == h){
+            return 1;
+        }
+        if (mostLeftLevel(node.left,level+1) == h){
+            return (1<<(h-level)) + bs(node.right,level + 1,h);
+        } else {
+            return (1<<(h - level - 1)) + bs(node.left,level+1,h);
+        }
+    }
+
+    public static int mostLeftLevel(TreeNode node , int level){
+        while (node != null){
+            level ++;
+            node = node.left;
+        }
+        return level - 1;
+    }
 }
