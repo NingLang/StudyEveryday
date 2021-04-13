@@ -1,3 +1,5 @@
+package com.langer.algorithm.other;
+
 public class InverseParisInArray {
     public static int reversePairs(int[] nums) {
         if (nums == null || nums.length == 1){

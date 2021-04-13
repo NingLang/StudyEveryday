@@ -1,7 +1,8 @@
+package com.langer.algorithm.other;
+
 import java.util.Arrays;
 
 /**
- * @ClassName Permutation
  * @Desctiption 全排列
  * @Author NingLang
  * @Date 2019/7/9 21:49
