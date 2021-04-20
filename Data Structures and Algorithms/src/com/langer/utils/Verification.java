@@ -1,9 +1,6 @@
 package com.langer.utils;
 
-import com.langer.algorithm.sort.BubbleSort;
-import com.langer.algorithm.sort.InsertionSort;
-import com.langer.algorithm.sort.MergeSort;
-import com.langer.algorithm.sort.SelectionSort;
+import com.langer.algorithm.sort.*;
 
 import java.util.Arrays;
 
@@ -14,6 +11,7 @@ public class Verification {
         SelectionSort selectionSort = new SelectionSort();
         InsertionSort insertionSort = new InsertionSort();
         MergeSort mergeSort = new MergeSort();
+        QuickSort quickSort = new QuickSort();
         ArrayUtils arrayUtils = new ArrayUtils();
         for (int i = 0; i < 100; i++) {
             int [] arr = arrayUtils.randomArray(10,100);
@@ -23,7 +21,7 @@ public class Verification {
                 arrTmp1[j] = arr[j];
                 arrTmp2[j] = arr[j];
             }
-            insertionSort.insertionSort(arrTmp1);
+            quickSort.quickSort(arrTmp1, 0, 9);
             Arrays.sort(arrTmp2);
             for (int j = 0; j < arr.length; j++) {
                 if(arrTmp1[j] != arrTmp2[j]) {
