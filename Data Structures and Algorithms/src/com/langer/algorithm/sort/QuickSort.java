@@ -5,6 +5,12 @@ import com.langer.utils.ArrayUtils;
 public class QuickSort {
 
 
+    /**
+     * 经典快排
+     * @param arr 待排序数组
+     * @param L 数组左边界
+     * @param R 数组右边界
+     */
     public void quickSort(int [] arr, int L, int R){
         if(L < R){
             int mid = partition(arr, L, R);
@@ -13,6 +19,12 @@ public class QuickSort {
         }
     }
 
+    /**
+     * 快排基于荷兰国旗问题优化
+     * @param arr 待排序数组
+     * @param L 数组左边界
+     * @param R 数组右边界
+     */
     public void quickSortOpt(int [] arr, int L, int R){
         if(L < R){
             int [] p = partitionOpt(arr, L, R);
@@ -23,11 +35,10 @@ public class QuickSort {
     }
     public static int partition(int []arr, int L, int R){
         ArrayUtils arrayUtils = new ArrayUtils();
-        int num = arr[R];
         int more = R;
         int curr = L;
         while(curr < more){
-            if(arr[curr] <= num){
+            if(arr[curr] <= arr[R]){
                 curr++;
             }else {
                 arrayUtils.swap(arr, curr, --more);
@@ -39,19 +50,19 @@ public class QuickSort {
 
     public static int[] partitionOpt(int []arr, int L, int R){
         ArrayUtils arrayUtils = new ArrayUtils();
-        int num = arr[R];
         int less = L - 1;
-        int more = R + 1;
+        int more = R;
         int curr = L;
         while(curr < more){
-            if(arr[curr] < num){
+            if(arr[curr] < arr[R]){
                 arrayUtils.swap(arr, curr++, ++less);
-            }else if(arr[curr] > num) {
+            }else if(arr[curr] > arr[R]) {
                 arrayUtils.swap(arr, curr, --more);
             }else {
                 curr++;
             }
         }
-        return new int[]{less, more};
+        arrayUtils.swap(arr, curr, R);
+        return new int[]{less, more + 1};
     }
 }

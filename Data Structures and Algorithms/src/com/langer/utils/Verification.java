@@ -12,6 +12,7 @@ public class Verification {
         InsertionSort insertionSort = new InsertionSort();
         MergeSort mergeSort = new MergeSort();
         QuickSort quickSort = new QuickSort();
+        HeapSort heapSort = new HeapSort();
         ArrayUtils arrayUtils = new ArrayUtils();
         for (int i = 0; i < 100; i++) {
             int [] arr = arrayUtils.randomArray(10,100);
@@ -21,7 +22,8 @@ public class Verification {
                 arrTmp1[j] = arr[j];
                 arrTmp2[j] = arr[j];
             }
-            quickSort.quickSort(arrTmp1, 0, 9);
+//            quickSort.quickSortOpt(arrTmp1, 0, 9);
+            heapSort.heapSort(arrTmp1);
             Arrays.sort(arrTmp2);
             for (int j = 0; j < arr.length; j++) {
                 if(arrTmp1[j] != arrTmp2[j]) {
