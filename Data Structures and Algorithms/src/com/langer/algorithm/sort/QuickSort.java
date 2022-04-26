@@ -4,7 +4,6 @@ import com.langer.utils.ArrayUtils;
 
 public class QuickSort {
 
-
     /**
      * 经典快排
      * @param arr 待排序数组
@@ -17,21 +16,6 @@ public class QuickSort {
             quickSort(arr, L, mid - 1);
             quickSort(arr,mid + 1, R);
         }
-    }
-
-    /**
-     * 快排基于荷兰国旗问题优化
-     * @param arr 待排序数组
-     * @param L 数组左边界
-     * @param R 数组右边界
-     */
-    public void quickSortOpt(int [] arr, int L, int R){
-        if(L < R){
-            int [] p = partitionOpt(arr, L, R);
-            quickSortOpt(arr, L, p[0]);
-            quickSortOpt(arr,p[1], R);
-        }
-
     }
     public static int partition(int []arr, int L, int R){
         ArrayUtils arrayUtils = new ArrayUtils();
@@ -48,6 +32,20 @@ public class QuickSort {
         return curr;
     }
 
+    /**
+     * 快排基于荷兰国旗问题优化
+     * @param arr 待排序数组
+     * @param L 数组左边界
+     * @param R 数组右边界
+     */
+    public void quickSortOpt(int [] arr, int L, int R){
+        if(L < R){
+            int [] p = partitionOpt(arr, L, R);
+            quickSortOpt(arr, L, p[0]);
+            quickSortOpt(arr,p[1], R);
+        }
+
+    }
     public static int[] partitionOpt(int []arr, int L, int R){
         ArrayUtils arrayUtils = new ArrayUtils();
         int less = L - 1;
